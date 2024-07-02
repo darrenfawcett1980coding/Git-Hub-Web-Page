@@ -1,0 +1,96 @@
+<!-- ___________________________comtainer template_______________________ -->
+
+    <!-- <div class="picture-container">
+          <div class="disc-container">
+
+            <div class="picture">
+              <img src="images/step-1.png" alt="" />
+            </div>
+
+            <div class="text-container">
+
+            <div class="p-container">
+              <p id="copy-text-1">git config --global user.name "Darren Fawcett"</p>
+              <div data-text="copy-text-1" class="copy-btn" >Copy</div>
+            </div>
+
+            <div class="p-container">
+              <p id="copy-text-2">
+                git config --global user.email darrenfawcett1980coding@gmail.com
+              </p>
+              <div data-text="copy-text-2" class="copy-btn" >Copy</div>
+            </div>
+            
+            <div class="p-container">
+              <p id="copy-text-3">cd "C:/Users/User/Desktop/HIT HUB" (Your path to folder)</p>
+              <div data-text="copy-text-3" class="copy-btn" >Copy</div>
+            </div>
+          
+          </div>
+        </div>
+          -->
+
+          document.addEventListener('DOMContentLoaded', function () {
+  ////_____________MAIN CONTAINER_______________
+  const container = document.querySelector('.main-container');
+
+  imgAndText.forEach((item) => {
+    ////_________________________________________________PICTURE CONTAINER
+    const pictureContainer = document.createElement('div');
+    pictureContainer.classList.add('picture-container');
+
+    ////________________________________________________DISCRIPTION CONTAINER
+    const discContainer = document.createElement('div');
+    discContainer.classList.add('disc-container');
+
+    ////_______________________________________________PICTURE DIV
+    const pictureDiv = document.createElement('div');
+    pictureDiv.classList.add('picture');
+    const img = document.createElement('img');
+    img.src = `images/${item.img}`;
+    img.alt = '';
+    pictureDiv.appendChild(img);
+
+    discContainer.appendChild(pictureDiv);
+    ////______________________________________________PICTURE DIV CLOSED
+
+    ////_________________________________________________TEXT CONTAINER
+    const textContainer = document.createElement('div');
+    textContainer.classList.add('text-container');
+
+    item.text.forEach((text, index) => {
+      ////_________________________________________________P CONTAINER DIV
+      const pContainer = document.createElement('div');
+      pContainer.classList.add('p-container');
+      pContainer.id = 'p-container';
+
+      ////_________________________________________________<p>
+      const paragragh = document.createElement('p');
+      const paragraghId = `copy-text-${index + 1}`;
+      paragragh.id = paragraghId;
+      paragragh.textContent = text;
+      pContainer.appendChild(paragragh);
+      ////_________________________________________________<p> CLOSED
+
+      ////_________________________________________________COPY BTN
+      const copyBtn = document.createElement('div');
+      copyBtn.innerText = 'Copy';
+      copyBtn.classList.add('copy-btn');
+      copyBtn.setAttribute('data-text', paragraghId);
+      copyBtn.addEventListener('click', () => copyToClipboard(text));
+
+      ////_________________________________________________P DIV CLOSED
+      pContainer.appendChild(copyBtn);
+      ////_________________________________________________COPY BTN CLOSED
+      textContainer.appendChild(pContainer);
+    });
+
+    ////_________________________________________________TEXT CONTAINER CLOSED
+    discContainer.appendChild(textContainer);
+    ////________________________________________________DISCRIPTION CONTAINER
+    pictureContainer.appendChild(discContainer);
+    ////_________________________________________________PICTURE CONTAINER
+    container.appendChild(pictureContainer);
+  });
+});
+
